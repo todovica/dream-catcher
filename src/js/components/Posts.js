@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { getData } from "../actions/index";
 
@@ -9,20 +9,15 @@ function mapStateToProps(state) {
 }
 
     
-export class Post extends Component {
+function Post (props) {
 
-  componentDidMount() {
-    // calling the new action creator
-    this.props.getData();
-  }
+  props.getData();
 
-  render() {
     return <ul>
-    {this.props.articles.map(el => (
+    {props.articles.map(el => (
       <li key={el.id}>{el.title}</li>
     ))}
-  </ul>;;
-  }
+  </ul>;
 
 }
 

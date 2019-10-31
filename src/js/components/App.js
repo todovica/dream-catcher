@@ -4,8 +4,11 @@ import List from "./List";
 import Form from "./Form";
 import Post from "./Posts";
 
+import Container from '@material-ui/core/Container';
+
 const App = () => (
-  <>
+  <Container>
+    
     <div>
       <h2>Articles</h2>
       <List />
@@ -18,7 +21,7 @@ const App = () => (
       <h2>API posts</h2>
       <Post />
     </div>
-  </>
+  </Container>
 );
 
 
