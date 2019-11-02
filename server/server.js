@@ -16,6 +16,8 @@ app.use(basicAuth);
 // api routes
 app.use('/users', require('./users/users.controller'));
 
+app.use('/email', require('./email/email.controller'));
+
 // global error handler
 app.use(errorHandler);
 

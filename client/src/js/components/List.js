@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 
 function mapStateToProps(state) {
   return {
-    articles: state.articles.slice(0, 10)
+    articles: state.articles.slice(0, 20)
   };
 }
 
