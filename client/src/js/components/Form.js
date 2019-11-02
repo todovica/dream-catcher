@@ -78,6 +78,7 @@ function ConnectedForm(props) {
       setDate("");
       setContent("");
       setEmail("");
+      alert("Your story will apear on our page after you click on confirmation link we've sent to your email");
       props.handleClose();
     }
     

@@ -7,11 +7,12 @@ export function addArticle(payload) {
   let title = payload.title;
   let date = payload.date;
   let content = payload.content;
+  let email = payload.email;
   
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ title, date, content })
+    body: JSON.stringify({ title, date, content, email })
 };
 
   return function(dispatch) {
