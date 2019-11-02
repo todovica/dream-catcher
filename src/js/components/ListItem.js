@@ -55,7 +55,7 @@ export default function ListItem(props) {
           </IconButton>
         }
         title={props.title}
-        subheader={(!props.date) ? "01/01/1979" : props.date.toLocaleDateString()}
+        subheader={(!props.date) ? "01/01/1979" : props.date}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">

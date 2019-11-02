@@ -17,11 +17,9 @@ function List (props) {
   
   return <Grid container spacing={3}>
     {props.articles.map(el => (
-      <>
-        <Grid item sm={6} md={3} key={el.title}>
-          <ListItem title={el.title} date={el.date} content={el.content} />
-        </Grid>
-      </>
+      <Grid key={el.title} item sm={6} md={3} key={el.title}>
+        <ListItem title={el.title} date={el.date} content={el.content} />
+      </Grid>
     ))}
     </Grid>;
 
