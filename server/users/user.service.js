@@ -13,7 +13,7 @@ async function getStories() {
     return client.db("dream_catcher").collection("stories").find().toArray();
 }
 
-async function addArticle({ title, date, content }) {
+async function addArticle({ title, date, content, email }) {
     const collection = client.db("dream_catcher").collection('stories');
     await collection.findOne({title: title})
         .then(function(value) {
@@ -21,7 +21,8 @@ async function addArticle({ title, date, content }) {
                 collection.insertOne({
                     title: title,
                     date: date,
-                    content: content
+                    content: content,
+                    email: email
                 });
             } else {
                 throw 'error adding article: title exists';
@@ -29,6 +30,6 @@ async function addArticle({ title, date, content }) {
         })
         .catch((err) => console.log("ERROR addArticle: " + err));
         
-    return { title, date, content };
+    return { title, date, content, email };
 
 }

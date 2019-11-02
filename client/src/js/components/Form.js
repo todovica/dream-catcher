@@ -41,8 +41,10 @@ function ConnectedForm(props) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [content, setContent] = useState("");
+  const [email, setEmail] = useState("");
   const [titleError, setTitleError] = useState(false);
   const [contentError, setContentError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
   
   function handleChange(event) {
     if(event.target.id==='title') {
@@ -51,6 +53,9 @@ function ConnectedForm(props) {
     } else if(event.target.id==='content') {
       setContentError(false);
       setContent(event.target.value);
+    } else if(event.target.id==='email') {
+      setEmailError(false);
+      setEmail(event.target.value);
     } else {
       console.error("id not recognized")
     }
@@ -61,16 +66,18 @@ function ConnectedForm(props) {
     event.preventDefault();
     let date = new Date().toLocaleDateString();
 
-    if(!title || !content) {
+    if(!title || !content || !email) {
       if(!title) setTitleError("Required");
       if(!content) setContentError("Required");
+      if(!email) setEmailError("Required");
     } else if(props.articles.find((article) => article.title===title)) {
       setTitleError("Title must be unique");
     } else { 
-      props.addArticle({ title, date, content });
+      props.addArticle({ title, date, content, email });
       setTitle("");
       setDate("");
       setContent("");
+      setEmail("");
       props.handleClose();
     }
     
@@ -100,6 +107,16 @@ function ConnectedForm(props) {
           variant="outlined"
           helperText={(contentError) ? contentError : ""}
           error={(contentError) ? true : false}
+        />
+        <TextField
+          id="email"
+          label="email"
+          value={email}
+          onChange={handleChange}
+          margin="normal"
+          variant="outlined"
+          helperText={(emailError) ? emailError : ""}
+          error={(emailError) ? true : false}
         />
         <Box direction="row">
           <Button color="primary" onClick={handleSubmit} className={classes.button}> Save </Button>
