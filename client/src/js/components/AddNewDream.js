@@ -81,7 +81,7 @@ export default function AddNewDream() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-          <Form />
+          <Form handleClose={handleClose} />
           </div>
         </Fade>
       </Modal>

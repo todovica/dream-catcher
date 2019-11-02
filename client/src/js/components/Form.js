@@ -46,10 +46,10 @@ function ConnectedForm(props) {
   
   function handleChange(event) {
     if(event.target.id==='title') {
-      setTitleError("");
+      setTitleError(false);
       setTitle(event.target.value);
     } else if(event.target.id==='content') {
-      setContentError("");
+      setContentError(false);
       setContent(event.target.value);
     } else {
       console.error("id not recognized")
@@ -61,16 +61,19 @@ function ConnectedForm(props) {
     event.preventDefault();
     let date = new Date().toLocaleDateString();
 
-    if(!title) setTitleError("Required");
-    if(!content) setContentError("Required");
-
-    (props.articles.find((article) => article.title===title)) ?  setTitleError("Title must be unique") : props.addArticle({ title, date, content });
-    
-    if(!titleError && !contentError) {
+    if(!title || !content) {
+      if(!title) setTitleError("Required");
+      if(!content) setContentError("Required");
+    } else if(props.articles.find((article) => article.title===title)) {
+      setTitleError("Title must be unique");
+    } else { 
+      props.addArticle({ title, date, content });
       setTitle("");
       setDate("");
       setContent("");
+      props.handleClose();
     }
+    
   }
     
   return (
@@ -100,7 +103,7 @@ function ConnectedForm(props) {
         />
         <Box direction="row">
           <Button color="primary" onClick={handleSubmit} className={classes.button}> Save </Button>
-          <Button color="secondary" onClick={handleSubmit} className={classes.button}> Cancel </Button>
+          <Button color="secondary" onClick={props.handleClose} className={classes.button}> Cancel </Button>
         </Box>
       </FormControl>
     </Box>
