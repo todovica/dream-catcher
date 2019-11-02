@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
+import { getStories } from "../actions/index";
 import ListItem from './ListItem';
 import Grid from '@material-ui/core/Grid';
 
-const mapStateToProps = state => {
-    return { articles: state.articles }
+function mapStateToProps(state) {
+  return {
+    articles: state.articles.slice(0, 10)
+  };
 }
 
-const ConnectedList = ({articles}) => {
-  console.log(articles)
+    
+function List (props) {
+
+  if(!props.articles.length) props.getStories();
+  
   return <Grid container spacing={3}>
-    {articles.map(el => (
+    {props.articles.map(el => (
       <>
         <Grid item sm={6} md={3} key={el.title}>
           <ListItem title={el.title} date={el.date} content={el.content} />
@@ -18,10 +24,11 @@ const ConnectedList = ({articles}) => {
       </>
     ))}
     </Grid>;
+
 }
 
-// List is the result of connecting the stateless component ConnectedList with the Redux store.
-const List = connect(mapStateToProps)(ConnectedList);
 
-
-export default List;
+export default connect(
+    mapStateToProps,
+  { getStories }
+)(List);

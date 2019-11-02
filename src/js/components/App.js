@@ -1,7 +1,6 @@
 // src/js/components/App.js
 import React from "react";
 import List from "./List";
-import Post from "./Posts";
 import AddNewDream from "./AddNewDream";
 import backgroundImage from './background.png'
 
@@ -42,10 +41,6 @@ function App() {
     <Container>
       <List />
     </Container>
-    <div>
-      <h2>API posts</h2>
-      <Post />
-    </div>
   </React.Fragment>
 };
 
