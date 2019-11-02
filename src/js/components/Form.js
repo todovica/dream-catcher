@@ -14,6 +14,12 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
+function mapStateToProps(state) {
+  return {
+    articles: state.articles.slice(0, 10)
+  };
+}
+
 const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1),
@@ -35,11 +41,15 @@ function ConnectedForm(props) {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [content, setContent] = useState("");
+  const [titleError, setTitleError] = useState(false);
+  const [contentError, setContentError] = useState(false);
   
   function handleChange(event) {
     if(event.target.id==='title') {
+      setTitleError("");
       setTitle(event.target.value);
     } else if(event.target.id==='content') {
+      setContentError("");
       setContent(event.target.value);
     } else {
       console.error("id not recognized")
@@ -49,13 +59,19 @@ function ConnectedForm(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    let date = new Date();
+    let date = new Date().toLocaleDateString();
+    console.log(props.articles);
+
+    if(!title) setTitleError("Required");
+    if(!content) setContentError("Required");
+
+    (props.articles.find((article) => article.title===title)) ?  setTitleError("Title must be unique") : props.addArticle({ title, date, content });
     
-    console.log(date);
-    props.addArticle({ title, date, content });
-    setTitle("");
-    setDate("");
-    setContent("");
+    if(!titleError && !contentError) {
+      setTitle("");
+      setDate("");
+      setContent("");
+    }
   }
     
   return (
@@ -68,6 +84,8 @@ function ConnectedForm(props) {
           onChange={handleChange}
           margin="normal"
           variant="outlined"
+          helperText={(titleError) ? titleError : ""}
+          error={(titleError) ? true : false}
         />
         <TextField
           id="content"
@@ -78,6 +96,8 @@ function ConnectedForm(props) {
           rows="10"
           margin="normal"
           variant="outlined"
+          helperText={(contentError) ? contentError : ""}
+          error={(contentError) ? true : false}
         />
         <Box direction="row">
           <Button color="primary" onClick={handleSubmit} className={classes.button}> Save </Button>
@@ -89,6 +109,6 @@ function ConnectedForm(props) {
 
 }
 
-const Form = connect(null, mapDispatchToProps)(ConnectedForm);
+const Form = connect(mapStateToProps, mapDispatchToProps)(ConnectedForm);
 
 export default Form;
