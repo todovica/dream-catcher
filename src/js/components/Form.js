@@ -60,7 +60,6 @@ function ConnectedForm(props) {
   function handleSubmit(event) {
     event.preventDefault();
     let date = new Date().toLocaleDateString();
-    console.log(props.articles);
 
     if(!title) setTitleError("Required");
     if(!content) setContentError("Required");

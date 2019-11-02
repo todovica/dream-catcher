@@ -4,8 +4,23 @@ import { authHeader } from '../helpers/auth-header';
 import { ADD_ARTICLE, DATA_LOADED } from "../constants/action-types";
 
 export function addArticle(payload) {
-  // here we need to contact server to add new article to database
-    return { type: ADD_ARTICLE, payload }
+  let title = payload.title;
+  let date = payload.date;
+  let content = payload.content;
+  
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, date, content })
+};
+
+  return function(dispatch) {
+    return fetch(`http://localhost:4000/users/addArticle`, requestOptions)
+      .then(response => response.json())
+      .then(json => {
+        dispatch({ type: ADD_ARTICLE, payload: json });
+      });
+    }
   };
 
   
