@@ -1,6 +1,8 @@
 // src/js/components/App.js
 import React from "react";
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import List from "./List";
+import ConfirmPage from "./ConfirmPage";
 import AddNewDream from "./AddNewDream";
 import backgroundImage from './background.png'
 
@@ -37,11 +39,17 @@ function App() {
                <Typography variant="h2" component="h6" className={classes.titleFont} > {'Share your dream'} </Typography>
                <AddNewDream />
            </Grid>
-    
-    <Container>
-      <List />
-    </Container>
-  </React.Fragment>
+
+           <Container>
+             <BrowserRouter>  
+               <Switch>
+                 <Route exact path='/confirm/:id' component={ConfirmPage} />
+                 <Route exact path='/' component={List} />
+                 <Redirect from='*' to='/'/>
+               </Switch>
+             </BrowserRouter>
+           </Container>
+         </React.Fragment>
 };
 
 
