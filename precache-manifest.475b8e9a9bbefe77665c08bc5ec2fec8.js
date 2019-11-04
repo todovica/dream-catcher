@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3bb8650b3ff35ad30716e06a7eae0c88",
+    "revision": "a9cca6f4409d0165bbe04b18f4a9cc4f",
     "url": "/dream-catcher/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/dream-catcher/static/js/2.68b46f12.chunk.js"
   },
   {
-    "revision": "48b3f84904bef6ebd08a",
-    "url": "/dream-catcher/static/js/main.7ab5ccd6.chunk.js"
+    "revision": "dcd72f9c0729ef199613",
+    "url": "/dream-catcher/static/js/main.3ed53512.chunk.js"
   },
   {
     "revision": "8ca1765e46339f9fdb9b",
