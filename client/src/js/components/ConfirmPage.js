@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { getStories } from "../actions/index";
+import { getStories, confirm } from "../actions/index";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -27,6 +27,11 @@ function ConfirmPage (props) {
   const classes = useStyles();
   if(!props.articles.length) props.getStories();
   const { id } = props.match.params;
+
+  let a = props.articles.find((a) => a._id===id);
+  if(a){
+    props.confirm(a);
+  }
   
   return <Grid container
            direction="column"
@@ -47,5 +52,5 @@ function ConfirmPage (props) {
 
 export default connect(
     mapStateToProps,
-    { getStories }
+    { getStories, confirm }
 )(ConfirmPage);

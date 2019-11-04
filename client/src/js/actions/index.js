@@ -16,7 +16,7 @@ export function addArticle(payload) {
 };
 
   return function(dispatch) {
-    return fetch(`http://localhost:4000/users/addArticle`, requestOptions)
+    return fetch(`https://test-server-express-2.herokuapp.com/users/addArticle`, requestOptions)
       .then(response => response.json())
       .then(json => {
         dispatch({ type: ADD_ARTICLE, payload: json });
@@ -33,10 +33,34 @@ export function getStories() {
   };
 
   return function(dispatch) {
-  return fetch("http://localhost:4000/users/getStories")
+  return fetch("https://test-server-express-2.herokuapp.com/users/getStories")
     .then(response => response.json())
     .then(json => {
       dispatch({ type: DATA_LOADED, payload: json });
     });
   }
 }
+
+
+export function confirm(payload) {
+  let title = payload.title;
+  let date = payload.date;
+  let content = payload.content;
+  let email = payload.email;
+  
+  console.log(" confirm(payload)");
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, date, content, email })
+};
+
+  return function(dispatch) {
+    return fetch(`https://178.221.74.252/email/confirm`, requestOptions)
+      .then(response => response.json())
+      .then(json => {
+        console.log("updated")
+        //dispatch({ type: ADD_ARTICLE, payload: json });
+      });
+    }
+  };

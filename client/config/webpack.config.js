@@ -679,7 +679,7 @@ module.exports = function(webpackEnv) {
     externals: {
       // global app config object
       config: JSON.stringify({
-          apiUrl: 'http://localhost:4000'
+          apiUrl: 'test-server-express-2.herokuapp.com:80'
       })
   }
   };

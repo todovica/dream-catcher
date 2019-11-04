@@ -45,7 +45,7 @@ function App() {
                <Switch>
                  <Route exact path='/confirm/:id' component={ConfirmPage} />
                  <Route exact path='/' component={List} />
-                 <Redirect from='*' to='/'/>
+                 
                </Switch>
              </BrowserRouter>
            </Container>
