@@ -16,7 +16,7 @@ export function addArticle(payload) {
 };
 
   return function(dispatch) {
-    return fetch(`https://test-server-express-2.herokuapp.com/users/addArticle`, requestOptions)
+    return fetch(`https://test-server-express-2.herokuapp.com/email/addArticle`, requestOptions)
       .then(response => response.json())
       .then(json => {
         dispatch({ type: ADD_ARTICLE, payload: json });
@@ -33,7 +33,7 @@ export function getStories() {
   };
 
   return function(dispatch) {
-  return fetch("https://test-server-express-2.herokuapp.com/users/getStories")
+  return fetch("https://test-server-express-2.herokuapp.com/email/getStories")
     .then(response => response.json())
     .then(json => {
       dispatch({ type: DATA_LOADED, payload: json });
