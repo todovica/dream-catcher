@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/dream-catcher/static/js/main.63276364.chunk.js",
-    "main.js.map": "/dream-catcher/static/js/main.63276364.chunk.js.map",
+    "main.js": "/dream-catcher/static/js/main.da9d9e69.chunk.js",
+    "main.js.map": "/dream-catcher/static/js/main.da9d9e69.chunk.js.map",
     "runtime-main.js": "/dream-catcher/static/js/runtime-main.e331ee93.js",
     "runtime-main.js.map": "/dream-catcher/static/js/runtime-main.e331ee93.js.map",
-    "static/js/2.54a318c1.chunk.js": "/dream-catcher/static/js/2.54a318c1.chunk.js",
-    "static/js/2.54a318c1.chunk.js.map": "/dream-catcher/static/js/2.54a318c1.chunk.js.map",
+    "static/js/2.e90dd85a.chunk.js": "/dream-catcher/static/js/2.e90dd85a.chunk.js",
+    "static/js/2.e90dd85a.chunk.js.map": "/dream-catcher/static/js/2.e90dd85a.chunk.js.map",
     "index.html": "/dream-catcher/index.html",
-    "precache-manifest.d8770e9aff1a2c78abab16c1ca0a8279.js": "/dream-catcher/precache-manifest.d8770e9aff1a2c78abab16c1ca0a8279.js",
+    "precache-manifest.a5c39f21331c6ff8b2e4f97d314fa338.js": "/dream-catcher/precache-manifest.a5c39f21331c6ff8b2e4f97d314fa338.js",
     "service-worker.js": "/dream-catcher/service-worker.js",
     "static/media/background.png": "/dream-catcher/static/media/background.d2b1d46d.png"
   },
   "entrypoints": [
     "static/js/runtime-main.e331ee93.js",
-    "static/js/2.54a318c1.chunk.js",
-    "static/js/main.63276364.chunk.js"
+    "static/js/2.e90dd85a.chunk.js",
+    "static/js/main.da9d9e69.chunk.js"
   ]
 }
