@@ -2,9 +2,11 @@
 import React from "react";
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import List from "./List";
+import Form from "./Form";
 import ConfirmPage from "./ConfirmPage";
 import AddNewDream from "./AddNewDream";
 import backgroundImage from './background.png'
+import AddIcon from '@material-ui/icons/Add';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -41,7 +43,10 @@ function App() {
                  <Typography variant="h2" component="h6" className={classes.titleFont} > {'Dream catcher'} </Typography>
                  <Typography variant="h4" component="h4" className={classes.titleFont} > {'Share your dream!!!'} </Typography>
                </Box>
-               <AddNewDream />
+               <AddNewDream icon={<AddIcon />}>
+                 <Form />
+               </AddNewDream>
+               
            </Grid>
 
            <Container>
@@ -50,7 +55,6 @@ function App() {
                  <Route exact path='/dream-catcher/confirm/:id' component={ConfirmPage} />
                  <Route exact path='/dream-catcher' component={List} />
                  <Redirect from='*' to='/dream-catcher'/>
-                 
                </Switch>
              </BrowserRouter>
            </Container>
