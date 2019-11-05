@@ -42,9 +42,12 @@ function ConnectedForm(props) {
   const [date, setDate] = useState("");
   const [content, setContent] = useState("");
   const [email, setEmail] = useState("");
+  const [author, setAuthor] = useState("");
+
   const [titleError, setTitleError] = useState(false);
   const [contentError, setContentError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [authorError, setAuthorError] = useState(false);
   
   function handleChange(event) {
     if(event.target.id==='title') {
@@ -56,6 +59,9 @@ function ConnectedForm(props) {
     } else if(event.target.id==='email') {
       setEmailError(false);
       setEmail(event.target.value);
+    } else if(event.target.id==='author') {
+      setAuthorError(false);
+      setAuthor(event.target.value);
     } else {
       console.error("id not recognized")
     }
@@ -66,18 +72,20 @@ function ConnectedForm(props) {
     event.preventDefault();
     let date = new Date().toLocaleDateString();
 
-    if(!title || !content || !email) {
+    if(!title || !content || !email || !author) {
       if(!title) setTitleError("Required");
       if(!content) setContentError("Required");
       if(!email) setEmailError("Required");
+      if(!author) setAuthorError("Required");
     } else if(props.articles.find((article) => article.title===title)) {
       setTitleError("Title must be unique");
     } else { 
-      props.addArticle({ title, date, content, email });
+      props.addArticle({ title, date, content, email, author });
       setTitle("");
       setDate("");
       setContent("");
       setEmail("");
+      setAuthor("");
       alert("Your story will apear on our page after you click on confirmation link we've sent to your email");
       props.handleClose();
     }
@@ -118,6 +126,16 @@ function ConnectedForm(props) {
           variant="outlined"
           helperText={(emailError) ? emailError : ""}
           error={(emailError) ? true : false}
+        />
+        <TextField
+          id="author"
+          label="author"
+          value={author}
+          onChange={handleChange}
+          margin="normal"
+          variant="outlined"
+          helperText={(authorError) ? authorError : ""}
+          error={(authorError) ? true : false}
         />
         <Box direction="row">
           <Button color="primary" onClick={handleSubmit} className={classes.button}> Save </Button>
