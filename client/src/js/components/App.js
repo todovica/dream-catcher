@@ -39,7 +39,7 @@ function App() {
              alignItems="flex-start" className={classes.root} >
                <Box>
                  <Typography variant="h2" component="h6" className={classes.titleFont} > {'Dream catcher'} </Typography>
-                 <Typography variant="h4" component="h4" className={classes.titleFont} > {'Share your dream'} </Typography>
+                 <Typography variant="h4" component="h4" className={classes.titleFont} > {'Share your dream!!!'} </Typography>
                </Box>
                <AddNewDream />
            </Grid>
