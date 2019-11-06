@@ -8,7 +8,7 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Form from "./Form";
+import StoryContent from "./StoryContent";
 import OpenStory from "./OpenStory";
 
 const useStyles = makeStyles(theme => ({
@@ -36,11 +36,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function ListItem(props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   return (
     <Card className={classes.card}>
@@ -55,7 +50,7 @@ export default function ListItem(props) {
         subheader={(!props.date) ? "01/01/1979" : props.date}
       />
         <OpenStory content={props.content}>
-          <Form />
+          <StoryContent title={props.title} content={props.content} author={props.author} />
         </OpenStory>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
