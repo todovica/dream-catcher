@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
+import {Editor, EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -31,16 +32,18 @@ const useStyles = makeStyles(theme => ({
     width: '500px',
     maxWidth: 360,
     overflow: 'auto',
-  },
+  }
 }));
 
 function ConnectedForm(props) {
 
   const classes = useStyles();
+  const localStorageContent = window.localStorage.getItem('content');
 
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
-  const [content, setContent] = useState("");
+  const [editorContent, setEditorContent] = useState((localStorageContent) ? EditorState.createWithContent(convertFromRaw(JSON.parse(localStorageContent))) : EditorState.createEmpty());
+  //const [editorContent, setEditorContent] = useState(EditorState.createEmpty());
   const [email, setEmail] = useState("");
   const [author, setAuthor] = useState("");
 
@@ -49,13 +52,17 @@ function ConnectedForm(props) {
   const [emailError, setEmailError] = useState(false);
   const [authorError, setAuthorError] = useState(false);
   
+  function onChange(editorState) {
+    window.localStorage.setItem('content', JSON.stringify(convertToRaw(editorState.getCurrentContent())));
+    console.log('content state', convertToRaw(editorState.getCurrentContent()));
+    setEditorContent(editorState);
+
+  }
+
   function handleChange(event) {
     if(event.target.id==='title') {
       setTitleError(false);
       setTitle(event.target.value);
-    } else if(event.target.id==='content') {
-      setContentError(false);
-      setContent(event.target.value);
     } else if(event.target.id==='email') {
       setEmailError(false);
       setEmail(event.target.value);
@@ -72,18 +79,18 @@ function ConnectedForm(props) {
     event.preventDefault();
     let date = new Date().toLocaleDateString();
 
-    if(!title || !content || !email || !author) {
+    if(!title || !email || !author) {
       if(!title) setTitleError("Required");
-      if(!content) setContentError("Required");
       if(!email) setEmailError("Required");
       if(!author) setAuthorError("Required");
     } else if(props.articles.find((article) => article.title===title)) {
       setTitleError("Title must be unique");
     } else { 
-      props.addArticle({ title, date, content, email, author });
+      window.localStorage.setItem('content', '');
+      props.addArticle({ title, date, content: convertToRaw(editorContent.getCurrentContent()), email, author });
       setTitle("");
       setDate("");
-      setContent("");
+      setEditorContent(EditorState.createEmpty());
       setEmail("");
       setAuthor("");
       alert("Your story will apear on our page after you click on confirmation link we've sent to your email");
@@ -105,18 +112,11 @@ function ConnectedForm(props) {
           helperText={(titleError) ? titleError : ""}
           error={(titleError) ? true : false}
         />
-        <TextField
-          id="content"
-          label="Write your story here..."
-          value={content}
-          onChange={handleChange}
-          multiline
-          rows="10"
-          margin="normal"
-          variant="outlined"
-          helperText={(contentError) ? contentError : ""}
-          error={(contentError) ? true : false}
-        />
+        
+        <div className="editorContainer">
+          <Editor editorState={editorContent} onChange={onChange} />
+          
+        </div>
         <TextField
           id="email"
           label="email"

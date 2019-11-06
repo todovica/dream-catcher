@@ -52,7 +52,6 @@ export default function Overlay(props) {
   const classes = useStyles();
 
   const childrenWithProps = React.Children.map(props.children, child => {
-    console.log(child)
     return React.cloneElement(child, { handleClose: props.handleClose })
   }
   );

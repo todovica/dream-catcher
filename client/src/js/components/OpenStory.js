@@ -19,7 +19,7 @@ export default function OpenStory(props) {
     <div>
       <CardContent onClick={handleOpen}>
         <Typography variant="body2" color="textSecondary" component="p">
-          {props.content.substr(0,150)+"..."}
+          {"fake summary ..."}
         </Typography>
       </CardContent>
       <Overlay open={open} handleClose={handleClose}>
