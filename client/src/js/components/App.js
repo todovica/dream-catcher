@@ -44,6 +44,7 @@ const useStyles = makeStyles(theme => ({
     fontStyle: 'italic',
     fontWeight: '400',
     fontFamily: 'cursive',
+    color:"darkblue"
   }
 }));
 
