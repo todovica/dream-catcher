@@ -11,8 +11,10 @@ const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1),
   },
-  input: {
-    display: 'none',
+  confirm: {
+    backgroundColor: 'white',
+    marginTop: '200px',
+    paddingTop: '15px'
   },
 }));
 
@@ -36,7 +38,8 @@ function ConfirmPage (props) {
   return <Grid container
            direction="column"
            justify="center"
-           alignItems="center">
+           alignItems="center"
+           className={classes.confirm}>
               {(props.articles.find((a) => a._id===id)) ? 
                 <>
                   <Typography variant="subtitle1">Your story is uploaded to our server.</Typography> 

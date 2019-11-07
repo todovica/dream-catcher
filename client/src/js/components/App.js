@@ -31,9 +31,9 @@ const useStyles = makeStyles(theme => ({
     backgroundImage: `url(${backgroundImage})`,
     backgroundSize: 'cover',                     
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center',  
+    backgroundPosition: 'center center',
     marginBottom: '20px',
-    minHeight: '100%'
+    minHeight: '500px'
   },
   zoom: {
     position: 'fixed',
