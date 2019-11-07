@@ -56,7 +56,7 @@ export function confirm(payload) {
 };
 
   return function(dispatch) {
-    return fetch(`https://178.221.74.252/email/confirm`, requestOptions)
+    return fetch(`https://test-server-express-2.herokuapp.com/email/confirm`, requestOptions)
       .then(response => response.json())
       .then(json => {
         console.log("updated")
