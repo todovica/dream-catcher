@@ -29,12 +29,10 @@ const useStyles = makeStyles(theme => ({
     display: 'none',
   },
   main: {
-    width: '500px',
-    maxWidth: 360,
     overflow: 'auto',
   },
   editorContainer: {
-    border: '1px solid rgba(0, 0, 0, 0.23)',
+    //border: '1px solid rgba(0, 0, 0, 0.23)',
     height: '300px',
     padding: '15px',
     overflow: 'auto'
@@ -114,14 +112,11 @@ function ConnectedForm(props) {
           value={title}
           onChange={handleChange}
           margin="normal"
-          variant="outlined"
           helperText={(titleError) ? titleError : ""}
           error={(titleError) ? true : false}
         />
-        
         <div className={classes.editorContainer}>
-          <Editor editorState={editorContent} onChange={onChange} />
-          
+          <Editor editorState={editorContent} onChange={onChange} placeholder="Tell a story..." />
         </div>
         <TextField
           id="email"
@@ -129,7 +124,6 @@ function ConnectedForm(props) {
           value={email}
           onChange={handleChange}
           margin="normal"
-          variant="outlined"
           helperText={(emailError) ? emailError : ""}
           error={(emailError) ? true : false}
         />
@@ -139,7 +133,6 @@ function ConnectedForm(props) {
           value={author}
           onChange={handleChange}
           margin="normal"
-          variant="outlined"
           helperText={(authorError) ? authorError : ""}
           error={(authorError) ? true : false}
         />

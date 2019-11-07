@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 345,
     '&:hover': {
-      background: 'seashell',
+      background: 'aliceblue',
    },
    
   },

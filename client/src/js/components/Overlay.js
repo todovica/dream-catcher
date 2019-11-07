@@ -2,15 +2,18 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
+import Grid from '@material-ui/core/Grid';
 import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
 
 const useStyles = makeStyles(theme => ({
+  
   modal: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
   paper: {
+    width: '100%',
     backgroundColor: theme.palette.background.paper,
     maxHeight: '550px',
     overflow: 'auto',
@@ -58,7 +61,7 @@ export default function Overlay(props) {
   );
 
   return (
-    <div>
+    <>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"
@@ -71,12 +74,12 @@ export default function Overlay(props) {
           timeout: 500,
         }}
       >
-        <Fade in={props.open}>
-        <div className={classes.paper}>
+        <Grid container direction="row" justify="center" alignItems="center" xs={12} md={8}>
+        <Fade in={props.open} className={classes.paper}>
             {childrenWithProps}
-          </div>
         </Fade>
+        </Grid>
       </Modal>
-    </div>
+    </>
   );
 }
