@@ -1,5 +1,6 @@
 // src/js/components/App.js
 import React from "react";
+import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import List from "./List";
 import Form from "./Form";
@@ -13,51 +14,113 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Fab from '@material-ui/core/Fab';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Zoom from '@material-ui/core/Zoom';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    height: '250px',
-    backgroundImage: `-webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(59%, rgba(0, 0, 0, 0)), color-stop(10%, #f5f0f0)), -webkit-gradient(linear, left top, left bottom, color-stop(10%, rgba(0, 0, 0, 0)), color-stop(70%, rgba(0, 0, 0, 0)), color-stop(190%, #f5f0f0)), url(${backgroundImage})`,
-    marginBottom: '20px'
+    minHight: '100%',
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: 'cover',                     
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',  
+    marginBottom: '20px',
+    minHeight: '100%'
+  },
+  zoom: {
+    position: 'fixed',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
   },
   titleFont: {
     fontStyle: 'italic',
     fontWeight: '400',
-    padding: '20px',
-    color: '#000067',
     fontFamily: 'cursive',
-
-  },
+  }
 }));
 
-function App() {
+
+function ScrollTop(props) {
+  const { children, window } = props;
+  const classes = useStyles();
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = event => {
+    const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
+
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
+  return (
+    <Zoom in={trigger}>
+      <div onClick={handleClick} role="presentation" className={classes.zoom}>
+        {children}
+      </div>
+    </Zoom>
+  );
+}
+
+ScrollTop.propTypes = {
+  children: PropTypes.element.isRequired,
+};
+
+function App(props) {
   const classes = useStyles();
   
   return <React.Fragment>
-           <Grid container
-             direction="row"
-             justify="space-between"
-             alignItems="flex-start" className={classes.root} >
-               <Box>
-                 <Typography variant="h2" component="h6" className={classes.titleFont} > {'Dream catcher'} </Typography>
-                 <Typography variant="h4" component="h4" className={classes.titleFont} > {'Share your dream!!!'} </Typography>
-               </Box>
-               <AddNewDream icon={<AddIcon />}>
-                 <Form />
-               </AddNewDream>
-               
-           </Grid>
-
-           <Container>
-             <BrowserRouter>  
-               <Switch>
-                 <Route exact path='/dream-catcher/confirm/:id' component={ConfirmPage} />
-                 <Route exact path='/dream-catcher' component={List} />
-                 <Redirect from='*' to='/dream-catcher'/>
-               </Switch>
-             </BrowserRouter>
+           <CssBaseline />
+           <AppBar>
+             <Toolbar>
+               <Typography variant="h5" component="h5" className={classes.titleFont} > {'Dream catcher'} </Typography>
+             </Toolbar>
+           </AppBar>
+           <Toolbar id="back-to-top-anchor" />
+           <Container className={classes.root}>
+           <Box align="center"> 
+             <Typography variant="h6" component="h5" className={classes.titleFont} > {'"Great stories happen to those who can tell them." - Ira Glass'} </Typography>
+             <AddNewDream icon={<AddIcon />} >
+               <Form />
+             </AddNewDream>
+           </Box>
+           <BrowserRouter>  
+             <Switch>
+               <Route exact path='/dream-catcher/confirm/:id' component={ConfirmPage} />
+               <Route exact path='/dream-catcher' component={List} />
+               <Redirect from='*' to='/dream-catcher'/>
+             </Switch>
+           </BrowserRouter>
+           
            </Container>
+           <BottomNavigation value={"sdfgh"} >
+             <BottomNavigationAction label="Ana Todovic" value="Ana Todovic" icon={'by Ana Todovic'} />
+           </BottomNavigation>
+           <ScrollTop {...props}>
+           <Grid container direction="row" justify="center" alignItems="center" >
+             <Fab color="secondary" aria-label="scroll back to top">
+               <KeyboardArrowUpIcon />
+             </Fab>
+             <AddNewDream icon={<AddIcon />}>
+               <Form />
+             </AddNewDream>
+           </Grid>
+           </ScrollTop>
          </React.Fragment>
 };
 
