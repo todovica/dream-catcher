@@ -4,42 +4,51 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
-import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
 import StoryContent from "./StoryContent";
-import OpenStory from "./OpenStory";
+import Overlay from "./Overlay";
 
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 345,
+    '&:hover': {
+      background: 'seashell',
+   },
+   
   },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
+  onhover: {
+    '&:hover': {
+      cursor: 'pointer'
+   }
+   },
+  main: {
+    width: '700px',
+    maxHeight: '500px',
+    overflow: 'auto'
+  }
 }));
 
 export default function ListItem(props) {
   const classes = useStyles();
 
+  const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+
   return (
     <Card className={classes.card}>
-      <CardHeader
+      <CardHeader onClick={handleOpen} className={classes.onhover}
         
         action={
           <IconButton aria-label="settings">
@@ -49,9 +58,14 @@ export default function ListItem(props) {
         title={props.title}
         subheader={(!props.date) ? "01/01/1979" : props.date}
       />
-        <OpenStory content={props.content}>
-          <StoryContent title={props.title} content={props.content} author={props.author} />
-        </OpenStory>
+      <CardContent onClick={handleOpen} className={classes.onhover}>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {props.content.blocks[0].text.substr(0,150) + "..."}
+        </Typography>
+      </CardContent>
+      <Overlay open={open} handleClose={handleClose}>
+      <StoryContent title={props.title} content={props.content} author={props.author} open={open} handleClose={handleClose} />
+      </Overlay>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
