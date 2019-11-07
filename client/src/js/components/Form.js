@@ -32,6 +32,12 @@ const useStyles = makeStyles(theme => ({
     width: '500px',
     maxWidth: 360,
     overflow: 'auto',
+  },
+  editorContainer: {
+    border: '1px solid rgba(0, 0, 0, 0.23)',
+    height: '300px',
+    padding: '15px',
+    overflow: 'auto'
   }
 }));
 
@@ -113,7 +119,7 @@ function ConnectedForm(props) {
           error={(titleError) ? true : false}
         />
         
-        <div className="editorContainer">
+        <div className={classes.editorContainer}>
           <Editor editorState={editorContent} onChange={onChange} />
           
         </div>

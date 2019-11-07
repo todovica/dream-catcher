@@ -13,6 +13,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     backgroundColor: theme.palette.background.paper,
     maxHeight: '550px',
+    overflow: 'auto',
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
@@ -71,7 +72,7 @@ export default function Overlay(props) {
         }}
       >
         <Fade in={props.open}>
-          <div className={classes.paper}>
+        <div className={classes.paper}>
             {childrenWithProps}
           </div>
         </Fade>
