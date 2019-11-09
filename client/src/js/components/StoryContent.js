@@ -15,10 +15,7 @@ const useStyles = makeStyles(theme => ({
     display: 'none',
   },
   main: {
-    width: '700px',
-    maxWidth: 700,
     maxHeight: '500px',
-    overflow: 'auto',
   },
 }));
 
