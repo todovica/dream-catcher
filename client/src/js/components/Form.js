@@ -106,7 +106,7 @@ function ConnectedForm(props) {
       setEditorContent(EditorState.createEmpty());
       setEmail("");
       setAuthor("");
-      alert("Your story will apear on our page after you click on confirmation link we've sent to your email");
+      alert("Now your story will temporarily appear on our site. After you click on the link we have sent to your email, your story will be permanently on our site.");
       props.handleClose();
     }
     
@@ -134,9 +134,6 @@ function ConnectedForm(props) {
                  </Typography>
                  <Typography className={classes.instructions}>
                    Email address will not appear in public. It will be used strictly for authentication.
-                 </Typography>
-                 <Typography className={classes.instructions}>
-                   After you click publish, your story will temporarily appear on our site. After you click on the link we have sent to your email, your story will be permanently on our site.
                  </Typography>
                  <TextField id="email" label="email" value={email} onChange={handleChange} margin="normal" helperText={(emailError) ? emailError : ""} error={(emailError) ? true : false} />
                  <TextField id="author" label="author" value={author} onChange={handleChange} margin="normal" helperText={(authorError) ? authorError : ""} error={(authorError) ? true : false} />
