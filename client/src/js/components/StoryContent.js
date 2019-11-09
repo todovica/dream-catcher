@@ -14,9 +14,6 @@ const useStyles = makeStyles(theme => ({
   input: {
     display: 'none',
   },
-  main: {
-    maxHeight: '500px',
-  },
 }));
 
 function StoryContent(props) {

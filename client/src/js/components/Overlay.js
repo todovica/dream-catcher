@@ -20,8 +20,8 @@ const useStyles = makeStyles(theme => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-    backgroundColor: '#e8e7e7',
-    backgroundImage: 'linear-gradient(to right, #f5f0f0 , white , white , white, white , white )',
+    backgroundColor: 'white',
+    //backgroundImage: 'linear-gradient(to right, #f5f0f0 , white , white , white, white , white )',
   },
   fab: {
     margin: theme.spacing(1),

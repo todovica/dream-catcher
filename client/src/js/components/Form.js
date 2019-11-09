@@ -12,6 +12,7 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import StoryContent from "./StoryContent";
 
 function mapDispatchToProps(dispatch) {
@@ -27,19 +28,16 @@ function mapStateToProps(state) {
 }
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: '90%',
-    height: '500px',
-  },
+  
   button: {
     marginRight: theme.spacing(1),
   },
-  main: {
-    overflow: 'auto',
-  },
   editorContainer: {
     height: '250px',
-    padding: '15px',
+    overflow: 'auto'
+  },
+  previewContainer: {
+    height: '400px',
     overflow: 'auto'
   },
   instructions: {
@@ -121,23 +119,19 @@ function ConnectedForm(props) {
   function getStepContent(step) {
     switch (step) {
       case 0:
-        return <Box className={classes.main}>
-                 <FormControl fullWidth>
-                   <TextField id="title" label="Title" value={title} onChange={handleChange} margin="normal" helperText={(titleError) ? titleError : ""} error={(titleError) ? true : false} />
-                     <div className={classes.editorContainer}>
-                       <Editor editorState={editorContent} onChange={onChange} placeholder="Tell a story..." />
-                     </div>
-                   </FormControl>
-               </Box>;
+        return <FormControl fullWidth>
+                 <TextField id="title" label="Title" value={title} onChange={handleChange} margin="normal" helperText={(titleError) ? titleError : ""} error={(titleError) ? true : false} />
+                 
+                     <Editor fullWidth editorState={editorContent} onChange={onChange} placeholder="Tell a story..." />
+  
+               </FormControl>;
       case 1:
         return <StoryContent title={title} content={convertToRaw(editorContent.getCurrentContent())} author={author} />;
       case 2:
-        return <Box className={classes.main}>
-                 <FormControl fullWidth>
-                   <TextField id="email" label="email" value={email} onChange={handleChange} margin="normal" helperText={(emailError) ? emailError : ""} error={(emailError) ? true : false} />
-                   <TextField id="author" label="author" value={author} onChange={handleChange} margin="normal" helperText={(authorError) ? authorError : ""} error={(authorError) ? true : false} />
-                 </FormControl>
-               </Box>;
+        return <FormControl fullWidth>
+                 <TextField id="email" label="email" value={email} onChange={handleChange} margin="normal" helperText={(emailError) ? emailError : ""} error={(emailError) ? true : false} />
+                 <TextField id="author" label="author" value={author} onChange={handleChange} margin="normal" helperText={(authorError) ? authorError : ""} error={(authorError) ? true : false} />
+               </FormControl>;
       default:
         return 'Unknown step';
     }
@@ -193,7 +187,7 @@ function ConnectedForm(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <Grid>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
@@ -211,16 +205,15 @@ function ConnectedForm(props) {
           );
         })}
       </Stepper>
-      <div>
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}> All steps completed - you&apos;re finished </Typography>
             <Button onClick={handleReset} className={classes.button}> Reset </Button>
           </div>
         ) : (
-          <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            <div>
+          <Grid>
+            <Grid>{getStepContent(activeStep)}</Grid>
+            <Grid>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}> Back </Button>
               {isStepOptional(activeStep) && (
                 <Button variant="contained" color="primary" onClick={handleSkip} className={classes.button}>
@@ -233,11 +226,10 @@ function ConnectedForm(props) {
                 onClick={activeStep === steps.length - 1 ? handleSubmit : handleNext}
                 className={classes.button} > {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
-            </div>
-          </div>
+            </Grid>
+          </Grid>
         )}
-      </div>
-    </div>
+    </Grid>
   );
 }
 

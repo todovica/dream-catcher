@@ -95,7 +95,7 @@ function App(props) {
            <Toolbar id="back-to-top-anchor" />
            <Container className={classes.root}>
            <Box align="center"> 
-             <Typography variant="h6" component="h5" className={classes.titleFont} > {'"Great stories happen to those who can tell them." - Ira Glass'} </Typography>
+             <Typography variant="h6" component="h5" className={classes.titleFont} > {'Journey begins with one step, a great story begins here.'} </Typography>
              <AddNewDream icon={<AddIcon />} >
                <Form />
              </AddNewDream>
