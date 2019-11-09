@@ -129,6 +129,15 @@ function ConnectedForm(props) {
         return <StoryContent title={title} content={convertToRaw(editorContent.getCurrentContent())} author={author} />;
       case 2:
         return <FormControl fullWidth>
+                 <Typography className={classes.instructions}>
+                   Name of the author will be publicly visible. Use pseudonym or anything you like.
+                 </Typography>
+                 <Typography className={classes.instructions}>
+                   Email address will not appear in public. It will be used strictly for authentication.
+                 </Typography>
+                 <Typography className={classes.instructions}>
+                   After you click publish, your story will temporarily appear on our site. After you click on the link we have sent to your email, your story will be permanently on our site.
+                 </Typography>
                  <TextField id="email" label="email" value={email} onChange={handleChange} margin="normal" helperText={(emailError) ? emailError : ""} error={(emailError) ? true : false} />
                  <TextField id="author" label="author" value={author} onChange={handleChange} margin="normal" helperText={(authorError) ? authorError : ""} error={(authorError) ? true : false} />
                </FormControl>;
@@ -212,7 +221,7 @@ function ConnectedForm(props) {
           </div>
         ) : (
           <Grid>
-            <Grid>{getStepContent(activeStep)}</Grid>
+            <Grid style={{ height: '380px'}}>{getStepContent(activeStep)}</Grid>
             <Grid>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}> Back </Button>
               {isStepOptional(activeStep) && (
@@ -224,7 +233,7 @@ function ConnectedForm(props) {
                 variant="contained"
                 color="primary"
                 onClick={activeStep === steps.length - 1 ? handleSubmit : handleNext}
-                className={classes.button} > {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                className={classes.button} > {activeStep === steps.length - 1 ? 'Publish' : 'Next'}
               </Button>
             </Grid>
           </Grid>
