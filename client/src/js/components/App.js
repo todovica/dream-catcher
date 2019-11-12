@@ -4,12 +4,10 @@ import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 
 import List from "./List";
-import Form from "./Form";
 import ConfirmPage from "./ConfirmPage";
-import AddNewDream from "./AddNewDream";
 import backgroundImage from '../../resources/background.png'
-import AddIcon from '@material-ui/icons/Add';
 import Copyright from './Copyright';
+import EditDialog from './EditDialog';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
@@ -102,9 +100,8 @@ function App(props) {
            <Grid container className={classes.start} direction="column" justify="flex-start" alignItems="center" >
            <Toolbar id="back-to-top-anchor" />
            <Typography variant="h6" component="h5" color='primary' className={classes.titleFont} > {'Journey begins with one step, a great story begins here.'} </Typography>
-           <AddNewDream icon={<AddIcon />} >
-             <Form />
-           </AddNewDream></Grid>
+           <EditDialog />
+           </Grid>
            <Container className={classes.root}>
            <BrowserRouter>  
              <Switch>
@@ -121,9 +118,7 @@ function App(props) {
              <Fab color="secondary" aria-label="scroll back to top">
                <KeyboardArrowUpIcon />
              </Fab>
-             <AddNewDream icon={<AddIcon />}>
-               <Form />
-             </AddNewDream>
+             <EditDialog />
            </Grid>
            </ScrollTop>
            </MuiThemeProvider>

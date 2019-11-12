@@ -12,7 +12,13 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+
+import Dialog from '@material-ui/core/Dialog';
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+
 import StoryContent from "./StoryContent";
+import { DialogTitle, DialogContent, DialogActions } from './DialogComponents';
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -27,7 +33,9 @@ function mapStateToProps(state) {
 }
 
 const useStyles = makeStyles(theme => ({
-  
+  fab: {
+    margin: theme.spacing(1),
+  },
   button: {
     marginRight: theme.spacing(1),
   },
@@ -48,6 +56,16 @@ const useStyles = makeStyles(theme => ({
 function ConnectedForm(props) {
 
   const classes = useStyles();
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
@@ -106,7 +124,7 @@ function ConnectedForm(props) {
       setEmail("");
       setAuthor("");
       alert("Now your story will temporarily appear on our site. After you click on the link we have sent to your email, your story will be permanently on our site.");
-      props.handleClose();
+      handleClose();
     }
     
   }
@@ -192,7 +210,13 @@ function ConnectedForm(props) {
   };
 
   return (
-    <Grid>
+    <div>
+        <Fab color="primary" aria-label="add" onClick={handleClickOpen} className={classes.fab}>
+        <AddIcon />
+      </Fab>
+      
+      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+      <DialogTitle id="customized-dialog-title" onClose={handleClose}>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
@@ -210,15 +234,18 @@ function ConnectedForm(props) {
           );
         })}
       </Stepper>
+      </DialogTitle>
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}> All steps completed - you&apos;re finished </Typography>
             <Button onClick={handleReset} className={classes.button}> Reset </Button>
           </div>
         ) : (
-          <Grid>
+          <>
+          <DialogContent dividers>
             <Grid style={{ height: '380px'}}>{getStepContent(activeStep)}</Grid>
-            <Grid>
+          </DialogContent>
+            <DialogActions>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}> Back </Button>
               {isStepOptional(activeStep) && (
                 <Button variant="contained" color="primary" onClick={handleSkip} className={classes.button}>
@@ -231,10 +258,11 @@ function ConnectedForm(props) {
                 onClick={activeStep === steps.length - 1 ? handleSubmit : handleNext}
                 className={classes.button} > {activeStep === steps.length - 1 ? 'Publish' : 'Next'}
               </Button>
-            </Grid>
-          </Grid>
+              </DialogActions>
+              </>
         )}
-    </Grid>
+    </Dialog>
+    </div>
   );
 }
 
