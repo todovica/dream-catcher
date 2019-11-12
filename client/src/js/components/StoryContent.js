@@ -26,7 +26,6 @@ function StoryContent(props) {
     <Box className={classes.main}>
       <Typography color="textSecondary" component="div">
         <Editor editorState={value} onChange={()=>{}} />
-        <Box textAlign="right" fontStyle="italic"> {'by ' + props.author}</Box>
       </Typography>
     </Box>
     );
