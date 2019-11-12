@@ -4,7 +4,6 @@ import { addArticle } from "../actions/index";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import {Editor, EditorState, convertToRaw, convertFromRaw } from 'draft-js';

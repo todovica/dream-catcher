@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { getStories } from "../actions/index";
-import ListItem from './ListItem';
+import CustomizedDialog from './CustomizedDialog';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { makeStyles } from '@material-ui/core/styles';
 
 function mapStateToProps(state) {
   return {
@@ -24,8 +23,8 @@ function List (props) {
   
   return <Grid container spacing={3}>
     {props.articles.map(el => (
-      <Grid key={el.title} item sm={6} md={3} key={el.title}>
-        <ListItem title={el.title} date={el.date} content={el.content} author={el.author} />
+      <Grid key={el.title} item sm={6} md={3}>
+        <CustomizedDialog title={el.title} date={el.date} content={el.content} author={el.author} />
       </Grid>
     ))}
     </Grid>;

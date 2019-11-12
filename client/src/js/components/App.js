@@ -7,7 +7,7 @@ import List from "./List";
 import Form from "./Form";
 import ConfirmPage from "./ConfirmPage";
 import AddNewDream from "./AddNewDream";
-import backgroundImage from './background.png'
+import backgroundImage from '../../resources/background.png'
 import AddIcon from '@material-ui/icons/Add';
 import Copyright from './Copyright';
 

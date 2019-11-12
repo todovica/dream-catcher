@@ -1,6 +1,3 @@
-import config from 'config';
-import { authHeader } from '../helpers/auth-header';
-
 import { ADD_ARTICLE, DATA_LOADED } from "../constants/action-types";
 
 export function addArticle(payload) {
@@ -27,17 +24,13 @@ export function addArticle(payload) {
   
 
 export function getStories() {
-  const requestOptions = {
-      method: 'GET',
-      headers: authHeader()
-  };
-
+  
   return function(dispatch) {
-  return fetch("https://test-server-express-2.herokuapp.com/email/getStories")
-    .then(response => response.json())
-    .then(json => {
-      dispatch({ type: DATA_LOADED, payload: json });
-    });
+    return fetch("https://test-server-express-2.herokuapp.com/email/getStories")
+      .then(response => response.json())
+      .then(json => {
+        dispatch({ type: DATA_LOADED, payload: json });
+      });
   }
 }
 
