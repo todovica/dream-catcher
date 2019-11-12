@@ -16,10 +16,11 @@ import Overlay from "./Overlay";
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 345,
+    boxShadow:' 0 1px 10px rgba(0,0,0,0.12), 0 1px 10px rgba(0,0,0,0.24)',
     '&:hover': {
       background: 'aliceblue',
    },
-   
+
   },
   onhover: {
     '&:hover': {
