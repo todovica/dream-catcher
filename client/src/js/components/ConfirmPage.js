@@ -12,8 +12,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
   },
   confirm: {
-    backgroundColor: 'white',
-    marginTop: '200px',
+    marginTop: '20px',
     paddingTop: '15px'
   },
 }));
@@ -43,11 +42,11 @@ function ConfirmPage (props) {
               {(props.articles.find((a) => a._id===id)) ? 
                 <>
                   <Typography variant="subtitle1">Your story is uploaded to our server.</Typography> 
-                  <Box><Button href="/" color="primary" className={classes.button}>Check it out</Button> </Box>
+                  <Box><Button href="/dream-catcher" color="primary" className={classes.button}>Check it out</Button> </Box>
                 </> :
                 <>
                   <Typography variant="subtitle1">Are you sure this is the right link?</Typography> 
-                  <Box><Button href="/" color="primary" className={classes.button}>Back</Button> </Box>
+                  <Box><Button href="/dream-catcher" color="primary" className={classes.button}>Back</Button> </Box>
                 </>}
          </Grid>;
 }
