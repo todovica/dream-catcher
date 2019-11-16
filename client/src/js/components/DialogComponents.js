@@ -13,6 +13,7 @@ const styles = theme => ({
     root: {
       margin: 0,
       padding: theme.spacing(2),
+      marginRight: '20px !important',
     },
     closeButton: {
       position: 'absolute',
@@ -39,7 +40,10 @@ const styles = theme => ({
   export const DialogContent = withStyles(theme => ({
     root: {
       padding: theme.spacing(2),
-      minWidth: '600px'
+      '@media(min-width: 780px)' : {
+        minWidth: '600px !important'
+      }
+      
     },
   }))(MuiDialogContent);
   

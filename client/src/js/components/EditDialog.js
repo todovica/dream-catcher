@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { addArticle } from "../actions/index";
 
 import { makeStyles } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
@@ -51,11 +53,18 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  dialogTitle: {
+    '@media(max-width: 780px)' : {
+      padding: '24px 0 0 0 !important'
+    }
+  }
 }));
 
 function ConnectedForm(props) {
 
   const classes = useStyles();
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [open, setOpen] = React.useState(false);
 
@@ -215,8 +224,8 @@ function ConnectedForm(props) {
         <AddIcon />
       </Fab>
       
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-      <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+      <Dialog fullScreen={fullScreen} onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+      <DialogTitle id="customized-dialog-title" className={classes.dialogTitle} onClose={handleClose}>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
